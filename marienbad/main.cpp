@@ -70,9 +70,20 @@ conf play(conf init)
 	}
 }
 
+// display the state of the game
+void print(conf c)
+{
+	for(int i=0;i<c.size();i++)
+	{
+		for(int j=0;j<c[i];j++) cout << "|";
+		cout << endl;
+	}
+}
+
 int main()
 {
 	conf c (1,2);
-	cout << play(c);
+	print(c);
+	print(play(c));
 	return 0; 
 }
