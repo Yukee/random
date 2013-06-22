@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h> // random numbers
+#include <time.h> // seed
 #include "Vector.h"
 
 using namespace std;
@@ -43,7 +45,8 @@ conf play(conf init)
 	int n = init.size();
 	
 	if(n == 1) {
-		cout << "Fin de partie. J'ai gagné. Comme prévu..." << endl;
+		if(init[0] == 0) cout << "Tu as gagné petit fumier. Je le savais depuis le début mais je t'ai laissé jouer pour te faire plaisir." << endl;
+		else cout << "Fin de partie. J'ai gagné. Comme prévu..." << endl;
 		return init.drop(0);
 	}
 	
@@ -65,8 +68,17 @@ conf play(conf init)
 			if(is_winning(temp)) return temp;
 		}
 		
-		cout << "On dirait bien que tu as gagné, petit fumier. Puisque c'est comme ça je ragequit." << endl;
-		return conf (0);
+		// if there is no winning configuration avalaible, do a random move
+		
+		srand(time(NULL));
+		
+		int col = rand() % n;
+		int num = rand() % init[col] + 1;
+		
+		if(num<init[col]) init[col] -= num;
+		else init = init.drop(col);
+		
+		return init;
 	}
 }
 
