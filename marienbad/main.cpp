@@ -66,24 +66,71 @@ conf play(conf init)
 		}
 		
 		cout << "On dirait bien que tu as gagné, petit fumier. Puisque c'est comme ça je ragequit." << endl;
-		return conf (1,1);
+		return conf (0);
 	}
 }
 
 // display the state of the game
 void print(conf c)
 {
-	for(int i=0;i<c.size();i++)
+	int n = c.size();
+	
+	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<c[i];j++) cout << "|";
 		cout << endl;
 	}
 }
 
+// game loop
+void game(conf c)
+{
+	conf current = c;
+	int move = 0;
+	
+	int col = 1;
+	int num = 0;
+	
+	while(current.size())
+	{		
+		// if it is human player's turn
+		if(!(move % 2)) {
+			
+			cout << "*************** DÉBUT DU TOUR " << move/2 << " ***************" << endl;
+			
+			print(current);
+
+			bool dumbass = true;
+			
+			while(dumbass) {
+				cout << "Numéro de la colonne à jouer : "; cin >> col; col = (int)col;
+				cout << "Nombre de bâtons à retirer : "; cin >> num;  num = (int)num;
+				
+				if( col-1<=(int)current.size() && col > 0) {
+					if(num<current[col-1]) { 
+						current[col-1] -= num; dumbass = false;
+					}
+					else if(num==current[col-1]) {
+						current = current.drop(col-1); dumbass = false;
+					}
+				}
+				
+				else cout << "Tu ne sais même pas jouer correctement, sac à foutre !" << endl;
+			}
+			
+		}
+		
+		else {
+			current = play(current);
+		}
+		
+		move ++;
+	}
+}
+
 int main()
 {
-	conf c (1,2);
-	print(c);
-	print(play(c));
+	conf c (3); c[0]=5; c[1]=3; c[2]=1;
+	game(c);
 	return 0; 
 }
