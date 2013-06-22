@@ -66,7 +66,7 @@ conf play(conf init)
 	int n = init.size();
 	
 	if(n == 1) {
-		cout << "Fin de partie. J'ai gagné. Comme prévu..." << endl;
+		cout << "J'ai gagné. Comme prévu..." << endl;
 		return init.drop(0);
 	}
 	
@@ -135,7 +135,7 @@ void game(conf c)
 					}
 				}
 				
-				else cout << "Tu ne sais même pas jouer correctement, sac à foutre !" << endl;
+				else cout << "Tu ne sais même pas jouer correctement, petit imbécile !" << endl;
 			}
 			
 		}
