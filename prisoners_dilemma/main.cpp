@@ -3,6 +3,8 @@
 #include <fstream>
 #include <time.h>
 #include <stdlib.h>
+#include <boost/lexical_cast.hpp> // int to string
+#include <algorithm> // max_element // test
 
 #include "cell.h"
 #include "containers/Array/Array.h"
@@ -71,11 +73,11 @@ int main()
     // number of interactions per generation
     int ni = 10;
     // number of generations
-    int gen = 500;
+    int gen = 2000;
 
     // initialization of the cell array
     srand(time(NULL));
-    INT n = 150;
+    INT n = 151;
     ij::Vector<INT> d (2, n);
     ij::Vector< ij::Vector <INT> > b = d.get_base_vectors(0,1);
     ij::Array<Cell> w (d);
@@ -84,6 +86,9 @@ int main()
         w[i*b[0] + j*b[1]] = Cell();
     }
 
+    // test
+    int mid = n/2;
+    w[mid*b[0] + mid*b[1]].set_thre(100);
 
     // linkage: the cells can now interact with their neighbourhood!
     link(w);
@@ -97,9 +102,11 @@ int main()
         for(INT it=0;it<s;++it) w[it].life_cycle(ni);
         for(INT it=0;it<s;++it) w[it].evolve();
         for(INT it=0;it<s;++it) w[it].update();
+
+        if(n % 2 == 0) write(boost::lexical_cast<string> (n/2), w);
     }
 
-    write("final", w);
+    //write("final", w);
 
     return 0;
 }

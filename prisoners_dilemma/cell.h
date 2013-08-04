@@ -25,6 +25,9 @@ public:
     int score() const;
     int thre() const;
 
+    // setters
+    void set_thre(const int thre);
+
     // interact with cell c, modify the score subsequently
     void interact(Cell * c);
 
