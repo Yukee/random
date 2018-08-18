@@ -1,0 +1,153 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4535,        144]
+NotebookOptionsPosition[      4113,        125]
+NotebookOutlinePosition[      4448,        140]
+CellTagsIndexPosition[      4405,        137]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"cities", "=", 
+   RowBox[{"CityData", "[", 
+    RowBox[{"{", 
+     RowBox[{"All", ",", "\"\<France\>\""}], "}"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"citiesloc", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CityData", "[", 
+      RowBox[{"#", ",", "\"\<Coordinates\>\""}], "]"}], "&"}], "/@", 
+    "cities"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"citiesloc", "=", 
+   RowBox[{"DeleteMissing", "[", 
+    RowBox[{"citiesloc", ",", "1", ",", "\[Infinity]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\<francecities.txt\>\"", ",", "citiesloc", ",", "\"\<Table\>\""}], 
+  "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.659376170109481*^9, 3.659376170116995*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NotebookDirectory", "::", "nosv"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The notebook \
+\[NoBreak]\\!\\(\\*TemplateBox[List[FrontEndObject[LinkObject[\\\"r2x7b_shm\\\
+\", 3, 1]], 17, \\\"FrontEndObject[LinkObject[\\\\\\\"r2x7b_shm\\\\\\\", 3, \
+1]]\\\", \\\"17\\\", \\\"\\\\\\\"Untitled-1\\\\\\\"\\\"], \
+\\\"NotebookObjectUnsaved\\\"]\\)\[NoBreak] is not saved. \\!\\(\\*ButtonBox[\
+\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/NotebookDirectory\\\", ButtonNote -> \
+\\\"NotebookDirectory::nosv\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.659376173248693*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"SetDirectory", "::", "fstr"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"File specification \[NoBreak]\\!\\($Failed\\)\[NoBreak] is \
+not a string of one or more characters. \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/fstr\\\", ButtonNote -> \
+\\\"SetDirectory::fstr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.659376173249401*^9}],
+
+Cell[BoxData["\<\"francecities.txt\"\>"], "Output",
+ CellChangeTimes->{3.659376292342578*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"citiesloc", "=", 
+    RowBox[{"Import", "[", 
+     RowBox[{"\"\<francecities.txt\>\"", ",", "\"\<Table\>\""}], "]"}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"reg", "=", 
+   RowBox[{"CountryData", "[", 
+    RowBox[{"\"\<France\>\"", ",", "\"\<Polygon\>\""}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"reg", "=", 
+   RowBox[{"Identity", "@@", 
+    RowBox[{"Identity", "@@", "reg"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"reg", "=", 
+   RowBox[{"First", "@", 
+    RowBox[{"MaximalBy", "[", 
+     RowBox[{"reg", ",", "Length"}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"region", "=", 
+   RowBox[{"MeshRegion", "[", 
+    RowBox[{"reg", ",", 
+     RowBox[{"Polygon", "[", 
+      RowBox[{"Range", "[", 
+       RowBox[{"Length", "[", "reg", "]"}], "]"}], "]"}]}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"rmf", "=", 
+   RowBox[{"RegionMember", "[", "region", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"citiesloc", "=", 
+    RowBox[{"Select", "[", 
+     RowBox[{"citiesloc", ",", "rmf"}], "]"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ccf", "=", 
+   RowBox[{"Nearest", "[", "citiesloc", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.659376223212928*^9, 3.65937622321878*^9}}]
+},
+WindowSize->{1920, 1021},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.1 for Linux x86 (64-bit) (March 23, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 830, 24, 143, "Input"],
+Cell[1413, 48, 686, 13, 36, "Message"],
+Cell[2102, 63, 490, 10, 23, "Message"],
+Cell[2595, 75, 93, 1, 32, "Output"]
+}, Open  ]],
+Cell[2703, 79, 1406, 44, 253, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
